@@ -40,20 +40,20 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Data</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="">
+                    <form id="form_input">
                         <div class="modal-body">
                             ID
-                            <input type="text" name="id" placeholder="Masukan ID" class="form-control">
+                            <input type="text" name="id" id="id" placeholder="Masukan ID" class="form-control">
                             Nama
-                            <input type="text" name="nama" placeholder="Masukan Nama" class="form-control">
+                            <input type="text" name="nama" id="nama" placeholder="Masukan Nama" class="form-control">
                             No Telp
-                            <input type="text" name="notelp" placeholder="Masukan No Telp" class="form-control">
+                            <input type="text" name="notelp" id="notelp" placeholder="Masukan No Telp" class="form-control">
                             Alamat
-                            <textarea name="alamat" id="" cols="20" rows="3" placeholder="Masukan Alamat" class="form-control"></textarea>
+                            <textarea name="alamat" id="alamat" cols="20" rows="3" placeholder="Masukan Alamat" class="form-control"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary">Reset</button>
+                            <button type="button" id="simpan" class="btn btn-secondary" data-bs-dismiss="modal">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -84,9 +84,32 @@
                 $('#tampil_data').html(data);
             })
         }
+
+        $(document).ready(function() {
+            // Menangani event klik tombol simpan
+            $("#simpan").click(function() {
+                // Mengirim data formulir menggunakan AJAX
+                $.ajax({
+                    url: 'simpan.php',
+                    type: 'post',
+                    data: $('#form_input').serialize(),
+                    success: function(response) {
+                        tampilData();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+                //kosongkan form id dan jurusan
+                $("#id").val("");
+                $("#nama").val("");
+                $("#notelp").val("");
+                $("#alamat").val("");
+
+            });
+        });
     </script>
 
 </body>
-
 
 </html>

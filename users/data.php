@@ -13,9 +13,7 @@
         $query = "SELECT * FROM users";
         $d = mysqli_query($koneksi, $query);
 
-        // Periksa apakah query berhasil dieksekusi
         if ($d) {
-            // Loop untuk mengambil setiap baris data
             while ($data = mysqli_fetch_assoc($d)) {
         ?>
                 <tr>
@@ -27,7 +25,6 @@
         <?php
             }
         } else {
-            // Tindakan yang diambil jika query tidak berhasil dieksekusi
             echo "Tidak ada data yang ditemukan.";
         }
         ?>
