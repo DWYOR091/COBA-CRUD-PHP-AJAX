@@ -52,7 +52,7 @@
                             <textarea name="alamat" id="alamat" cols="20" rows="3" placeholder="Masukan Alamat" class="form-control"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Reset</button>
+                            <button type="reset" class="btn btn-primary">Reset</button>
                             <button type="button" id="simpan" class="btn btn-secondary" data-bs-dismiss="modal">Simpan</button>
                         </div>
                     </form>
@@ -101,7 +101,7 @@
                         console.log(error);
                     }
                 });
-                //kosongkan form id dan jurusan
+                //kosongkan form 
                 $("#id").val("");
                 $("#nama").val("");
                 $("#notelp").val("");
@@ -112,21 +112,39 @@
             //hapus data
 
             $(document).on('click', '.hapus', function() {
-                confirm('anda yakin?')
                 //ambil isi dari id
                 var id = $(this).attr('id')
                 // console.log(id)
-                $.ajax({
-                    url: 'hapus.php',
-                    type: 'POST',
-                    data: {
-                        id: id
-                    },
-                    success: function(response) {
-                        tampilData()
-                    }
-                })
+                var konfirmasi = confirm('apakah anda yakin?')
+                if (konfirmasi) {
+                    $.ajax({
+                        url: 'hapus.php',
+                        type: 'POST',
+                        data: {
+                            id: id
+                        },
+                        success: function() {
+                            tampilData()
+                        }
+                    })
+                }
             })
+
+
+            //     $("#simpanEdit").click(function() {
+            //         // Mengirim data formulir menggunakan AJAX
+            //         $.ajax({
+            //             url: 'update.php',
+            //             type: 'post',
+            //             data: $('#form_edit').serialize(),
+            //             success: function(response) {
+            //                 tampilData();
+            //             },
+            //             error: function(xhr, status, error) {
+            //                 console.log(error);
+            //             }
+            //         });
+            //     });
         });
     </script>
 
