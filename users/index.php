@@ -85,6 +85,7 @@
             })
         }
 
+        //insert data
         $(document).ready(function() {
             // Menangani event klik tombol simpan
             $("#simpan").click(function() {
@@ -107,6 +108,25 @@
                 $("#alamat").val("");
 
             });
+
+            //hapus data
+
+            $(document).on('click', '.hapus', function() {
+                confirm('anda yakin?')
+                //ambil isi dari id
+                var id = $(this).attr('id')
+                // console.log(id)
+                $.ajax({
+                    url: 'hapus.php',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        tampilData()
+                    }
+                })
+            })
         });
     </script>
 
